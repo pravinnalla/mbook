@@ -12,7 +12,8 @@
 #include "pdfprint.h"
 
 
-
+#include <QDesktopServices>
+#include <QtCore>
 
 
 
@@ -43,6 +44,7 @@ private:
     void widgetOnOff(bool flag);
     void modelReset();
 
+    QString sourchCodeLink = "https://github.com/pravinnalla/mbook.git";
 
 
 
@@ -56,6 +58,8 @@ private slots:
     void on_actionHow_triggered();
 
 
+
+    void on_actiongithub_repository_triggered();
 
 public:
     MainWindow(QWidget *parent = nullptr);

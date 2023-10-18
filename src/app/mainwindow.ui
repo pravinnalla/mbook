@@ -293,8 +293,15 @@
     </property>
     <addaction name="actionHow"/>
    </widget>
+   <widget class="QMenu" name="menuSource_Code">
+    <property name="title">
+     <string>Source Code</string>
+    </property>
+    <addaction name="actiongithub_repository"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuSource_Code"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionImport_CSV_File">
@@ -327,6 +334,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="actiongithub_repository">
+   <property name="text">
+    <string>github repository</string>
    </property>
   </action>
  </widget>

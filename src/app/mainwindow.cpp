@@ -196,3 +196,8 @@ void MainWindow::on_actionHow_triggered()
 
 
 
+
+void MainWindow::on_actiongithub_repository_triggered()
+{
+    QDesktopServices::openUrl(QUrl(sourchCodeLink));
+}
