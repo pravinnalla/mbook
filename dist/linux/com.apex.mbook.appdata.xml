@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>com.apex.mbook</id>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>MIT</project_license>
+	<name>mbook</name>
+	<summary>Qt pdf for Linux Desktop</summary>
+	<developer_name>Pravin Nalla</developer_name>
+	<description>
+		<p>pdf genrator with Qt widget.</p>
+		<p>Key features of mbook:</p>
+		<ul>
+		   <li>Generate PDF from csv file</li>
+		</ul>
+	</description>
+	<launchable type="desktop-id">com.apex.mbook.desktop</launchable>
+	<url type="homepage">https://github.com/pravinnalla/mbook</url>
+	<url type="bugtracker">https://github.com/pravinnalla/mbook/issues</url>
+	<keywords>
+		<keyword translate="no">Memorandum Book</keyword>
+		<keyword>Jantri</keyword>
+		<keyword xml:lang="de">beurs</keyword>
+		<keyword xml:lang="pt">mensagens</keyword>
+	</keywords>
+	<screenshots>
+		<screenshot type="default">
+			<image>https://raw.githubusercontent.com/pravinnalla/mbook/main/screenshots/1.jpg</image>
+		</screenshot>
+	</screenshots>
+	<provides>
+		<binary>mbook</binary>
+	</provides>
+	<content_rating type="oars-1.0" />
+	<releases>
+		<release version="1.0" date="2023-10-23" />
+	</releases>
+</component>

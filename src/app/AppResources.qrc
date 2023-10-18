@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="MainWindowIcon">AppResources/icon24.svg</file>
+    </qresource>
+</RCC>

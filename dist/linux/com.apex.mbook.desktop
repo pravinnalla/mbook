@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=mbook
+GenericName[it]=Widget Qt pdf from csv
+GenericName=Qt Widget pdf
+Comment[it]=Un pdf from csv basato su Widget Qt
+Comment=Qt Widget application for office work
+Icon=com.apex.mbook
+Exec=mbook %u
+Terminal=false
+Type=Application
+Categories=pdf;csv;Qt;
+Keywords=mbook;Mbook;MBook;memorandum book;Memorandum Book;
+StartupWMClass=mbook
+StartupNotify=true
+MimeType=x-scheme-handler/mbook;
+X-GNOME-UsesNotifications=true
+
+Actions=Settings;
+
+
