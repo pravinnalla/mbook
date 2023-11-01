@@ -17,4 +17,9 @@ add_executable(MBook
     AppResources.qrc
 )
 
-target_link_libraries(MBook PRIVATE Qt5::Widgets Qt5::Sql Qt5::PrintSupport hpdf)
+target_link_libraries(MBook PRIVATE Qt5::Widgets Qt5::Sql hpdf)
+
+INSTALL(TARGETS MBook DESTINATION bin)
+INSTALL(TARGETS MBook
+        LIBRARY
+        DESTINATION lib)

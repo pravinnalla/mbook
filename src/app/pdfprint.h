@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "dbmanager.h"
-#include <QPrinter>
+
 #include <QSqlQuery>
 #include <QTextDocument>
 #include <QDate>
