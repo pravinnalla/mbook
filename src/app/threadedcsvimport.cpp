@@ -60,7 +60,6 @@ void ThreadedCsvImport::process()
                             //db.csvToTbl(line[1], line[2]);
                             mthreadDbManager.csvToTbl(lineCaseNo[0], lineCaseNo[1].toInt(), lineCaseNo[2].toInt(), newDate, fInfo.lastModified().toString("dd-MM-yyyy HH.mm.ss"));
 
-
                         }
                     }
                 }
@@ -69,8 +68,11 @@ void ThreadedCsvImport::process()
                 usleep(usleepTime);
                 i++;
             }
-            //delete duplicate here
+            //delete duplicate
             mthreadDbManager.deleteDuplicate();
+
+            // rearrange id vale
+            mthreadDbManager.arrangeId();
 
             f.close ();
 

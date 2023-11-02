@@ -26,103 +26,7 @@ void Pdfprint::printTable()
     }
 
     if(tblCount>=1)     //if table is not empty proceed
-    {
-
-        /*
-        QPrinter printer(QPrinter::HighResolution);
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName("MBookPDFoutput.pdf");
-        printer.setPaperSize(QPrinter::A4);
-
-        QPageLayout pageLayout = printer.pageLayout();
-        pageLayout.setMinimumMargins(QMarginsF(30,10,10,30));
-        printer.setPageLayout(pageLayout);
-
-
-        QSqlQuery qryDate;
-        qryDate.exec("SELECT DISTINCT nextdate from tblMain ORDER BY nextdate");
-
-
-
-        QString strHeaderandBg;
-        QTextStream outHandBg(&strHeaderandBg);
-
-        while (qryDate.next())
-        {
-            QString dateString = qryDate.value(0).toString();
-            QDate qryDt;
-            qryDt = QDate::fromString(dateString, "yyyy-MM-dd");
-            QString dateStringLong = qryDt.toString(Qt::DefaultLocaleLongDate);
-
-
-            outHandBg<<"<html>"
-                       "<head>"
-                       "<meta Content='Text/html; charset=Windows-1251'>"
-                       "</head>"
-                       "<body>";
-
-
-            outHandBg<<QString("<h3 align=center>%1</h3>").arg((!dateStringLong.isEmpty()) ? dateStringLong: QString("&nbsp;"));
-
-
-            outHandBg<<"<p align=center style='font-size:10pt; margin-bottom: 1em; margin-top:1em'>Took seat at .............................................. Rose at  .............................................. </p>"
-                       "<p align=center style='font-size:10pt; margin-bottom: 1em; margin-top:1em'>Took seat at .............................................. Rose at  .............................................. </p>"
-                       "<p></p>"
-                       "<table border=none cellspacing='0' cellpadding='0'>"
-                       "<tr><td width=20%></td><td width=80%></td></tr>";
-
-
-            QSqlQuery qryCasetype;
-            qryCasetype.prepare("SELECT DISTINCT casetype from tblMain WHERE nextdate=? ORDER BY nextdate");
-            qryCasetype.addBindValue(dateString);
-            qryCasetype.exec();
-            while (qryCasetype.next()){
-                QString casetypeString = qryCasetype.value(0).toString();
-
-                outHandBg<<QString("<tr><td>%1</td>").arg((!casetypeString.isEmpty()) ? casetypeString : QString("&nbsp;"));
-
-
-                outHandBg<<"<td><p style='line-height: 1.8;'>";
-
-                QSqlQuery qryCaseno;
-                qryCaseno.prepare("SELECT caseno, caseyear FROM tblMain WHERE casetype = ? AND nextdate = ?");
-                qryCaseno.addBindValue(casetypeString);
-                qryCaseno.addBindValue(dateString);
-                if (qryCaseno.exec()) {
-                    while (qryCaseno.next()) {
-
-                        QString casenoyearString=qryCaseno.value(0).toString()+"/"+qryCaseno.value(1).toString();
-
-                        outHandBg<<QString("%1,&emsp;&emsp;").arg((!casenoyearString.isEmpty()) ? casenoyearString : QString("&emsp;"));
-                    }
-                } else {
-                    qWarning() << "Query failed:" << qryCaseno.lastError().text();
-                }
-
-                outHandBg<<"</p></td></tr>";
-
-            }
-
-            outHandBg<<"</table>";
-            outHandBg<<"<hr /><p></p>";
-        }
-
-
-        outHandBg<<"</body></html>";
-
-        QTextDocument document;
-        document.setHtml(strHeaderandBg);
-        document.print(&printer);
-        //mdbPdfPrint.closeDb();        //close at end of function
-
-
-        //file save message
-        QString savingDirectory = QDir::currentPath();
-        QMessageBox::information(nullptr, QObject::tr("PDF was saved at..."),
-            QObject::tr("%1 was saved at %2").arg("MBookPDFoutput.pdf", savingDirectory),
-                QMessageBox::Ok);
-
-*/
+    {        
 
         pdf = HPDF_New (error_handler, NULL);
         if (!pdf) { printf ("error: cannot create PdfDoc object\n");  //return 1;
@@ -131,17 +35,11 @@ void Pdfprint::printTable()
         try {
             // do page description processes (we do not have to check the return code of functions)
 
-
             page = HPDF_AddPage (pdf);
             HPDF_Page_SetSize  (page, HPDF_PAGE_SIZE_A4, HPDF_PAGE_PORTRAIT);
             p_height = HPDF_Page_GetHeight (page);
             p_width = HPDF_Page_GetWidth (page);
 
-
-            /* Print the lines of the page. */
-//            HPDF_Page_SetLineWidth (page, 1);
-//            HPDF_Page_Rectangle (page, 50, 50, p_width-borderspace, p_height-borderspace);
-//            HPDF_Page_Stroke (page);
 
             /* Default font */
             def_font = HPDF_GetFont (pdf, "Helvetica", NULL);
@@ -277,16 +175,8 @@ void Pdfprint::printTable()
                 HPDF_Page_LineTo (page, 50 + (p_width-borderspace), p_height - heightcounter);
                 HPDF_Page_Stroke (page);
 
-                //qDebug()<<"dp_height"<<hightCounter;
-                //qDebug()<<p_height;
             }
 
-
-            // save the document to a file
-//            HPDF_SaveToFile (pdf, "fname.pdf");
-
-
-            //********************
 
             QString fileName = QFileDialog::getSaveFileName(0, tr("Save File"),"MBook.pdf", tr("PDF files (*.pdf)"));
 

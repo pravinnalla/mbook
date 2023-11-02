@@ -83,6 +83,7 @@ void MainWindow::on_btnImportCsv_clicked()
 
     mMainWinDbManager.closeDb();
 
+
     QString filename =  QFileDialog::getOpenFileName( this, "Open Document", QDir::currentPath(), "CSV files (*.csv)");
 
     // open file and count lines
@@ -99,7 +100,12 @@ void MainWindow::on_btnImportCsv_clicked()
         }
         f.close();
     }
+    else{
+        mMainWinDbManager.connectToDb();
+        modelReset();
+    }
     //line counts end
+
 
 
     //Prepare for thread to start
@@ -169,6 +175,7 @@ void MainWindow::on_btnRemoveCsv_clicked()
         if (QMessageBox::Yes == QMessageBox(QMessageBox::Information, "REMOVE CSV File", "Do you realy want to REMOVE this CSV File ?", QMessageBox::Yes|QMessageBox::No).exec())
         {
             mMainWinDbManager.deleteFromTbl(delString);
+            //mMainWinDbManager.arrangeId();
             modelReset();            
         }
     }
@@ -183,7 +190,6 @@ void MainWindow::on_btnGeneratePdf_clicked()
 }
 
 
-
 void MainWindow::on_actionHow_triggered()
 {
     QMessageBox::information(nullptr, QObject::tr("Help File"),
@@ -191,10 +197,6 @@ void MainWindow::on_actionHow_triggered()
                                       "with this utility. \n\n"
                                       "Click Cancel to close this dialog."), QMessageBox::Cancel);
 }
-
-
-
-
 
 
 void MainWindow::on_actiongithub_repository_triggered()

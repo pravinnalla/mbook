@@ -30,6 +30,8 @@ public:
 
 
     void deleteDuplicate();
+    int maxId();
+    void arrangeId();
 
 
 

@@ -81,7 +81,7 @@ bool DbManager::createTable()
 
     QSqlQuery qryCreateTbl;
     QString stringCreateTblQry="CREATE TABLE IF NOT EXISTS tblMain (mainid INTEGER NOT NULL, casetype TEXT NOT NULL, caseno INTEGER NOT NULL, caseyear INTEGER NOT NULL, nextdate DATE NOT NULL,"
-                               "filename TEXT NOT NULL, PRIMARY KEY(mainid AUTOINCREMENT))";
+                               "filename TEXT NOT NULL, PRIMARY KEY(mainid ))"; //AUTOINCREMENT
 
     if(qryCreateTbl.exec(stringCreateTblQry)){
         return true;
@@ -100,14 +100,17 @@ void DbManager::csvToTbl(const QString &casetype, const int &caseno, const int &
     QSqlQuery pragmJ1;
     pragmJ1.exec("PRAGMA journal_mode = MEMORY");
 
+    //get counter from function parameter
+    //int maxIDv=maxId();
 
     QSqlQuery qryMainInser;
-    qryMainInser.prepare("INSERT INTO tblMain (casetype, caseno, caseyear, nextdate, filename) VALUES (:ct, :cn, :cy, :nd, :fn)");
-    qryMainInser.bindValue(0,casetype);
-    qryMainInser.bindValue(1,caseno);
-    qryMainInser.bindValue(2,caseyear);
-    qryMainInser.bindValue(3,nextdate); //check valid date
-    qryMainInser.bindValue(4,filename);
+    qryMainInser.prepare("INSERT INTO tblMain (mainid, casetype, caseno, caseyear, nextdate, filename) VALUES (:id, :ct, :cn, :cy, :nd, :fn)");
+    qryMainInser.bindValue(0,maxId());
+    qryMainInser.bindValue(1,casetype);
+    qryMainInser.bindValue(2,caseno);
+    qryMainInser.bindValue(3,caseyear);
+    qryMainInser.bindValue(4,nextdate); //check valid date
+    qryMainInser.bindValue(5,filename);
     qryMainInser.exec();
 
 
@@ -127,9 +130,39 @@ void DbManager::deleteFromTbl(const QString &filename)
 void DbManager::deleteDuplicate()
 {
     QSqlQuery qryMainDelDup;
-    qryMainDelDup.prepare("DELETE FROM tblMain WHERE mainid NOT IN (select max(mainid) from tblmain group by casetype, caseno, caseyear, nextdate)");
+    qryMainDelDup.prepare("DELETE FROM tblMain WHERE mainid NOT IN (select max(mainid) from tblMain group by casetype, caseno, caseyear, nextdate)");
     qryMainDelDup.exec();
+
+    //alter sequence here
 
 }
 
+int DbManager::maxId()
+{
+    int IDcount=1;
+    QSqlQuery qryMainMaxId;
+    qryMainMaxId.exec("SELECT MAX(mainid) as maxCount from tblMain");
+    if(qryMainMaxId.next()){
+        IDcount=qryMainMaxId.value(0).toInt();
+        IDcount++;
+    }
+    return IDcount;
+}
 
+void DbManager::arrangeId()
+{
+    int uCounter=1;
+    QSqlQuery qryMainSelectId;
+    qryMainSelectId.exec("SELECT mainid from tblMain");
+    while (qryMainSelectId.next())
+    {
+        int oldID = qryMainSelectId.value(0).toInt();
+        qDebug()<<"oldID" << oldID;
+        QSqlQuery qryMainUpdateId;
+        qryMainUpdateId.prepare("UPDATE tblMain SET mainid=:uCounter WHERE mainid=:oldID");
+        qryMainUpdateId.bindValue(":uCounter", uCounter);
+        qryMainUpdateId.bindValue(":oldID", oldID);
+        qryMainUpdateId.exec();
+        uCounter++;
+    }
+}
