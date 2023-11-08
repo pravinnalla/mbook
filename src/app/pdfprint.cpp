@@ -200,7 +200,7 @@ void Pdfprint::printTable()
 
                         if (-1 == file.write(reinterpret_cast<const char *>(buf), siz))
                         {
-                            qDebug() << "Write PDF error";
+                            //qDebug() << "Write PDF error";
                             break;
                         }
                     }

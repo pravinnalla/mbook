@@ -303,7 +303,7 @@
    <addaction name="menuHelp"/>
    <addaction name="menuSource_Code"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionImport_CSV_File">
    <property name="text">
     <string>Import CSV File</string>

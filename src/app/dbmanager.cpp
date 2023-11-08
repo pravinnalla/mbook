@@ -157,7 +157,7 @@ void DbManager::arrangeId()
     while (qryMainSelectId.next())
     {
         int oldID = qryMainSelectId.value(0).toInt();
-        qDebug()<<"oldID" << oldID;
+        //qDebug()<<"oldID" << oldID;
         QSqlQuery qryMainUpdateId;
         qryMainUpdateId.prepare("UPDATE tblMain SET mainid=:uCounter WHERE mainid=:oldID");
         qryMainUpdateId.bindValue(":uCounter", uCounter);

@@ -25,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionQuit, &QAction::triggered, this, &QCoreApplication::quit, Qt::QueuedConnection);
 
     connect(ui->actionGenrate_PDF, &QAction::triggered, this, &MainWindow::on_btnGeneratePdf_clicked);
-    connect(ui->actionImport_CSV_File, &QAction::triggered, this, &MainWindow::on_btnImportCsv_clicked);    
+    connect(ui->actionImport_CSV_File, &QAction::triggered, this, &MainWindow::on_btnImportCsv_clicked);
+
 
 
 }
@@ -193,9 +194,9 @@ void MainWindow::on_btnGeneratePdf_clicked()
 void MainWindow::on_actionHow_triggered()
 {
     QMessageBox::information(nullptr, QObject::tr("Help File"),
-                          QObject::tr("Seprate HELP pdf file is provided.\n"
+                          QObject::tr("Seprate HELP pdf file for %1 is provided.\n"
                                       "with this utility. \n\n"
-                                      "Click Cancel to close this dialog."), QMessageBox::Cancel);
+                                      "Click Cancel to close this dialog.").arg(versionNo), QMessageBox::Cancel);
 }
 
 

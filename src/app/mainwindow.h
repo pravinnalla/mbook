@@ -46,7 +46,7 @@ private:
 
     QString sourchCodeLink = "https://github.com/pravinnalla/mbook.git";
 
-
+    QString versionNo = "Version 1.0.2";
 
 private slots:
     void slotThreadFininshed();
